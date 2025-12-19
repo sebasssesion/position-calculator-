@@ -1,140 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Position Size Calculator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .card {
-      background: #020617;
-      padding: 24px;
-      border-radius: 16px;
-      width: 380px;
-      box-shadow: 0 20px 40px rgba(0,0,0,.4);
-    }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      text-align: center;
-      letter-spacing: 1.5px;
-    }
-    label {
-      display: block;
-      font-size: 18px;
-      margin-top: 14px;
-      letter-spacing: 1px;
-      opacity: 0.85;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 6px;
-      border-radius: 10px;
-      border: none;
-      background: #020617;
-      color: #e5e7eb;
-      outline: 1px solid #1e293b;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      font-size: 18px;
-      letter-spacing: 0.5px;
-    }
-    }
-    button {
-      width: 100%;
-      margin-top: 22px;
-      padding: 14px;
-      border-radius: 14px;
-      border: none;
-      background: linear-gradient(135deg, #2563eb, #1e40af);
-      color: white;
-      font-family: 'Bebas Neue', Arial, sans-serif;
-      font-size: 20px;
-      letter-spacing: 1.5px;
-      cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Position Size Calculator</title>
 
-    button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.45);
-      opacity: 0.95;
-    }
+    <!-- Bebas Neue -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-    button:active {
-      transform: translateY(0);
-      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
-      opacity: 0.9;
-    }
-    }
-    .result {
-      margin-top: 32px;
-      background: #020617;
-      padding: 20px;
-      border-radius: 14px;
-      outline: 1px solid #1e293b;
-    }
-    .result span {
-      display: block;
-      margin-top: 12px;
-      font-size: 18px;
-      letter-spacing: 0.5px;
-    }
-  </style>
+    <style>
+        body {
+            background-color: #020617;
+            color: #e2e8f0;
+            font-family: 'Bebas Neue', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            background-color: #030b1c;
+            width: 90%;
+            max-width: 450px;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-size: 22px;
+            margin-top: 15px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-top: 6px;
+            font-size: 22px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            background-color: #0f172a;
+            color: #fff;
+        }
+
+        .result-box {
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #010812;
+            font-size: 22px;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 50px; }
+            label, input { font-size: 24px; }
+            .result-box { font-size: 24px; }
+        }
+    </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Position Size Calculator</h1>
 
-    <label>Account Balance ($)</label>
-    <input id="balance" type="number" step="0.01" oninput="calculate()" />
+    <div class="calculator-container">
+        <h1>POSITION SIZE CALCULATOR</h1>
 
-    <label>Risk (%)</label>
-    <input id="risk" type="number" step="0.1" oninput="calculate()" />
+        <label>Account Balance ($)</label>
+        <input id="balance" type="number" />
 
-    <label>Entry Price</label>
-    <input id="entry" type="number" step="0.01" oninput="calculate()" />
+        <label>Risk (%)</label>
+        <input id="risk" type="number" />
 
-    <label>Stop Loss Price</label>
-    <input id="stop" type="number" step="0.01" oninput="calculate()" />
+        <label>Entry Price</label>
+        <input id="entry" type="number" />
 
-    
+        <label>Stop Loss Price</label>
+        <input id="stop" type="number" />
 
-    <div class="result" id="result" style="display:none">
-      <span id="riskAmount"></span>
-      <span id="positionSize"></span>
+        <div class="result-box">
+            <div id="moneyRisk">Money at Risk: —</div>
+            <div id="positionSize">Position Size: — units</div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    function calculate() {
-      const balance = parseFloat(document.getElementById('balance').value);
-      const riskPercent = parseFloat(document.getElementById('risk').value);
-      const entry = parseFloat(document.getElementById('entry').value);
-      const stop = parseFloat(document.getElementById('stop').value);
+    <script>
+        const balance = document.getElementById("balance");
+        const risk = document.getElementById("risk");
+        const entry = document.getElementById("entry");
+        const stop = document.getElementById("stop");
+        const moneyRisk = document.getElementById("moneyRisk");
+        const positionSize = document.getElementById("positionSize");
 
-      if ([balance, riskPercent, entry, stop].some(isNaN)) return;
+        function recalc() {
+            const bal = parseFloat(balance.value);
+            const r = parseFloat(risk.value);
+            const e = parseFloat(entry.value);
+            const s = parseFloat(stop.value);
 
-      const riskAmount = balance * (riskPercent / 100);
-      const stopDistance = Math.abs(entry - stop);
+            if (isNaN(bal) || isNaN(r) || isNaN(e) || isNaN(s) || e === s) {
+                moneyRisk.textContent = "Money at Risk: —";
+                positionSize.textContent = "Position Size: — units";
+                return;
+            }
 
-      if (stopDistance <= 0) return;
+            const money = bal * (r / 100);
+            const size = money / Math.abs(e - s);
 
-      const positionSize = riskAmount / stopDistance;
+            moneyRisk.textContent = `Money at Risk: $${money.toFixed(2)}`;
+            positionSize.textContent = `Position Size: ${size.toFixed(3)} units`;
+        }
 
-      document.getElementById('result').style.display = 'block';
-      document.getElementById('riskAmount').innerText = `Money at risk:  $${riskAmount.toFixed(2)}`;
-      document.getElementById('positionSize').innerText = `Position size:  ${positionSize.toFixed(3)} units`;
-    }
-  </script>
+        balance.oninput =
+        risk.oninput =
+        entry.oninput =
+        stop.oninput =
+        recalc;
+    </script>
+
 </body>
 </html>
