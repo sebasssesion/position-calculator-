@@ -66,7 +66,7 @@
     const risk = document.getElementById("risk");
     const entry = document.getElementById("entry");
     const stop = document.getElementById("stop");
-    const positionSize = document.getElementById("positionSize");
+    const units = document.getElementById("units");
 
     function recalc() {
         const bal = parseFloat(balance.value);
@@ -75,13 +75,13 @@
         const s = parseFloat(stop.value);
 
         if (isNaN(bal) || isNaN(r) || isNaN(e) || isNaN(s) || e === s) {
-            positionSize.textContent = "Position Size: — units";
+            units.textContent = "Units: ";
             return;
         }
 
         const money = bal * (r / 100);
         const size = money / Math.abs(e - s);
-        positionSize.textContent = `Position Size: ${size.toFixed(3)} units`;
+        units.textContent = `Units: ${size.toFixed(3)}`;
     }
 
     balance.oninput =
