@@ -85,7 +85,7 @@
 
         <div class="result-box">
             <div id="moneyRisk">Money at Risk: </div>
-            <div id="positionSize">Units: </div>
+            <div id="units">Units: </div>
         </div>
     </div>
 
@@ -95,7 +95,7 @@
         const entry = document.getElementById("entry");
         const stop = document.getElementById("stop");
         const moneyRisk = document.getElementById("moneyRisk");
-        const positionSize = document.getElementById("positionSize");
+        const units = document.getElementById("units");
 
         function recalc() {
             const bal = parseFloat(balance.value);
@@ -104,8 +104,8 @@
             const s = parseFloat(stop.value);
 
             if (isNaN(bal) || isNaN(r) || isNaN(e) || isNaN(s) || e === s) {
-                moneyRisk.textContent = "Money at Risk: —";
-                positionSize.textContent = "Position Size: — units";
+                moneyRisk.textContent = "Money at Risk:";
+                units.textContent = "units:";
                 return;
             }
 
@@ -113,7 +113,7 @@
             const size = money / Math.abs(e - s);
 
             moneyRisk.textContent = `Money at Risk: $${money.toFixed(2)}`;
-            positionSize.textContent = `Position Size: ${size.toFixed(3)} units`;
+            units.textContent = `units: ${size.toFixed(3)} units`;
         }
 
         balance.oninput =
