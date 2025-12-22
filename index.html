@@ -17,6 +17,8 @@
     }
 
 .card {
+  position: relative;
+  z-index: 1;
   width: 350px;
   height: 450px;
   background: url("IMG_2174.PNG") center/cover no-repeat;
@@ -25,6 +27,21 @@
   padding: 40px;
   box-sizing: border-box;
 }
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -60px; /* makes the glow extend beyond the card */
+  background: radial-gradient(
+    circle,
+    #28183F 0%,     /* center color */
+    #0F0F0F 70%     /* fade into page background */
+  );
+  border-radius: 50%;
+  filter: blur(50px); /* softens the glow */
+  z-index: -1;       /* behind the card */
+}
+
 
     h1 {
       text-align: center;
