@@ -16,37 +16,15 @@
       font-family: Arial, sans-serif;
     }
 
-.card {
-  position: relative;                 /* for pseudo-elements */
-  width: 350px;
-  height: 450px;
-  background: url("pic.png") center/cover no-repeat;
-  border-radius: 25px;
-  color: #cccccc;
-  padding: 40px;
-  box-sizing: border-box;
-  overflow: hidden;                   /* keeps pseudo-element inside */
-  backdrop-filter: blur(5px);         /* optional frosted glass effect */
+    .card {
+      width: 350px;
+      height: 450px;
+      background: url("pic.png") center/cover no-repeat;
+      border-radius: 25px;
+      color: #cccccc;
+      padding: 40px;
+      box-sizing: border-box;
 }
-
-/* White bottom fade for glass effect */
-.card::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 50%;                        /* how far the fade goes up */
-  background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 0.25) 0%,    /* brighter at bottom */
-    rgba(255, 255, 255, 0) 100%      /* fades to transparent at middle */
-  );
-  border-radius: 0 0 25px 25px;       /* match card corners */
-  pointer-events: none;               /* allow clicks through it */
-  z-index: 2;                         /* above background but below content */
-}
-
 
     h1 {
       text-align: center;
