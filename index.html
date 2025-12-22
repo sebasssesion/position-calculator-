@@ -59,5 +59,39 @@
     <p>OpenMail revolutionizes email management with AI-driven sorting, boosting productivity and accessibility</p>
     <a href="#">Learn More →</a>
   </div>
+</div>
+
+  <script>
+    const balance = document.getElementById("balance");
+    const risk = document.getElementById("risk");
+    const entry = document.getElementById("entry");
+    const stop = document.getElementById("stop");
+    const positionSize = document.getElementById("positionSize");
+
+    function recalc() {
+        const bal = parseFloat(balance.value);
+        const r = parseFloat(risk.value);
+        const e = parseFloat(entry.value);
+        const s = parseFloat(stop.value);
+
+        if (isNaN(bal) || isNaN(r) || isNaN(e) || isNaN(s) || e === s) {
+            positionSize.textContent = "Position Size: — units";
+            return;
+        }
+
+        const money = bal * (r / 100);
+        const size = money / Math.abs(e - s);
+        positionSize.textContent = `Position Size: ${size.toFixed(3)} units`;
+    }
+
+    balance.oninput =
+    risk.oninput =
+    entry.oninput =
+    stop.oninput =
+    recalc;
+</script>
+
+
+
 </body>
 </html>
