@@ -16,32 +16,32 @@
       font-family: Arial, sans-serif;
     }
 
-.card {
-  position: relative;   /* creates a stacking context for the pseudo-element */
-  z-index: 1;           /* ensures card content sits above pseudo-element */
-  width: 350px;
-  height: 450px;
-  background: url("IMG_2174.PNG") center/cover no-repeat;
-  border-radius: 25px;
-  color: #cccccc;
-  padding: 40px;
-  box-sizing: border-box;
-  overflow: visible;    /* allow the glow to extend outside card */
-}
+    .card {
+      position: relative;   /* creates a stacking context for the pseudo-element */
+      z-index: 1;           /* ensures card content sits above pseudo-element */
+      width: 350px;
+      height: 450px;
+      background: url("IMG_2174.PNG") center/cover no-repeat;
+      border-radius: 25px;
+      color: #cccccc;
+      padding: 40px;
+      box-sizing: border-box;
+      overflow: visible;    /* allow the glow to extend outside card */
+    }
 
-.card::before {
-  content: "";
-  position: absolute;
-  top: 50%;             /* center the radial gradient */
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;         /* slightly bigger than card */
-  height: 400px;
-  background: radial-gradient(circle, #28183F 0%, #0F0F0F 70%);
-  border-radius: 50%;
-  filter: blur(60px);   /* soft glow */
-  z-index: -1;          /* sits behind card content */
-}
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 50%;             /* center the radial gradient */
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;         /* slightly bigger than card */
+      height: 400px;
+      background: radial-gradient(circle, #28183F 0%, #0F0F0F 70%);
+      border-radius: 50%;
+      filter: blur(60px);   /* soft glow */
+      z-index: -1;          /* sits behind card content */
+    }
 
 
     h1 {
