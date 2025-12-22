@@ -106,7 +106,7 @@
 
             if (isNaN(bal) || isNaN(r) || isNaN(e) || isNaN(s) || e === s) {
                 moneyRisk.textContent = "Money at Risk:";
-                units.textContent = "units:";
+                units.textContent = "Units:";
                 return;
             }
 
@@ -114,7 +114,7 @@
             const size = money / Math.abs(e - s);
 
             moneyRisk.textContent = `Money at Risk: $${money.toFixed(2)}`;
-            units.textContent = `units: ${size.toFixed(3)} units`;
+            units.textContent = `Units: ${size.toFixed(3)}`;
         }
 
         balance.oninput =
