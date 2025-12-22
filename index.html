@@ -1,144 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position Size Calculator</title>
 
-<title>Position Size Calculator</title>
+    <!-- Bebas Neue -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&family=Orbitron:wght@600&display=swap" rel="stylesheet">
-
-<style>
-    body {
-        margin: 0;
-        background: #06040d;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #eee;
-        overflow: hidden;
-    }
-
-    /* STRONGER PURPLE GLOW */
-    .aura {
-        position: absolute;
-        width: 450px;
-        height: 450px;
-        background: radial-gradient(circle,
-            rgba(180, 0, 255, 0.9),
-            rgba(120, 0, 200, 0.7),
-            rgba(40, 0, 80, 0.4),
-            rgba(0, 0, 0, 0)
-        );
-        filter: blur(120px);
-        z-index: -2;
-        top: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .calculator-container {
-        background: rgba(45, 25, 60, 0.25);
-        border: 1px solid rgba(200, 120, 255, 0.4);
-        backdrop-filter: blur(26px);
-        border-radius: 22px;
-
-        /* SMALLER SIZE */
-        padding: 26px;
-        width: 85%;
-        max-width: 340px;
-
-        box-shadow: 0 0 40px rgba(170, 0, 255, 0.65);
-    }
-
-    h1 {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 32px;
-        text-align: center;
-        margin-bottom: 22px;
-        color: #ffffff;
-        letter-spacing: 2px;
-        text-shadow: 0 0 25px rgba(200, 0, 255, 1);
-    }
-
-    label {
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 18px;
-        color: white;
-        text-shadow: 0 0 8px rgba(180, 0, 255, 0.7);
-    }
-
-    input {
-        font-family: 'Rajdhani', sans-serif;
-        font-size: 20px;
-        width: 100%;
-        padding: 10px;
-        margin-top: 6px;
-        margin-bottom: 14px;
-        border-radius: 8px;
-        border: none;
-        background: rgba(255,255,255,0.07);
-        color: white;
-        box-shadow: inset 0 0 10px rgba(200, 120, 255, 0.35);
-    }
-
-    .result-box {
-        background: rgba(60, 20, 80, 0.3);
-        border: 1px solid rgba(180, 100, 255, 0.5);
-        border-radius: 18px;
-        margin-top: 18px;
-        padding: 18px;
-        font-family: 'Orbitron', sans-serif;
-        font-size: 18px;
-        text-shadow: 0 0 8px rgba(200, 120, 255, .9);
-    }
-
-    .positive {
-        color: #7affd9;
-        text-shadow: 0 0 12px rgba(0,255,200,0.9);
-    }
-    .negative {
-        color: #ff6b8a;
-        text-shadow: 0 0 12px rgba(255,40,120,0.9);
-    }
-
-    @media (max-width: 600px) {
-        .calculator-container {
-            width: 90%;
-            max-width: 330px;
-            padding: 22px;
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #05070d;
+            font-family: 'Bebas Neue', sans-serif;
+            color: #e2e8f0;
+            overflow: hidden;
         }
-        h1 { font-size: 28px; }
-    }
-</style>
+
+        /* Neon aura glow */
+        .aura {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at center,
+                rgba(120, 0, 255, 0.5),
+                rgba(0, 200, 255, 0.4),
+                rgba(0, 0, 0, 0)
+            );
+            filter: blur(140px);
+            z-index: -2;
+        }
+
+        .aura.two {
+            top: 60%;
+            left: 60%;
+            background: radial-gradient(circle,
+                rgba(0, 255, 180, 0.5),
+                rgba(0, 100, 255, 0.4),
+                rgba(0, 0, 0, 0)
+            );
+        }
+
+        /* Glass card container */
+        .calculator-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 32px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+        }
+
+        h1 {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        label {
+            font-size: 24px;
+            margin-top: 16px;
+            display: block;
+        }
+
+        input {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            margin-top: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .result-box {
+            background: rgba(255, 255, 255, 0.05);
+            margin-top: 40px;
+            padding: 22px;
+            border-radius: 18px;
+            font-size: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .positive {
+            color: #3bff74; /* neon green */
+        }
+
+        .negative {
+            color: #ff4e4e; /* neon red */
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 50px; }
+            label, input, .result-box { font-size: 26px; }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="aura"></div>
+    <!-- glowing background auras -->
+    <div class="aura"></div>
+    <div class="aura two"></div>
 
-<div class="calculator-container">
+    <div class="calculator-container">
+        <h1>POSITION SIZE</h1>
 
-    <h1>POSITION SIZE</h1>
+        <label>Account Balance ($)</label>
+        <input id="balance" type="number">
 
-    <label>Account Balance ($)</label>
-    <input id="balance">
+        <label>Risk (%)</label>
+        <input id="risk" type="number">
 
-    <label>Risk (%)</label>
-    <input id="risk">
+        <label>Entry Price</label>
+        <input id="entry" type="number">
 
-    <label>Entry Price</label>
-    <input id="entry">
+        <label>Stop Loss Price</label>
+        <input id="stop" type="number">
 
-    <label>Stop Loss Price</label>
-    <input id="stop">
-
-    <div class="result-box">
-        <div id="moneyRisk">Money at Risk: —</div>
-        <div id="positionSize">Position Size: — units</div>
+        <div class="result-box">
+            <div id="moneyRisk">Money at Risk: —</div>
+            <div id="positionSize">Position Size: — units</div>
+        </div>
     </div>
-</div>
 
 <script>
     const balance = document.getElementById("balance");
@@ -164,12 +162,22 @@
         const money = bal * (r / 100);
         const size = money / Math.abs(e - s);
 
+        // dynamic color for risk
         moneyRisk.textContent = `Money at Risk: $${money.toFixed(2)}`;
-        moneyRisk.className = money > 0 ? "positive" : "negative";
+        if (money > 0) {
+            moneyRisk.className = "positive";
+        } else {
+            moneyRisk.className = "negative";
+        }
+
         positionSize.textContent = `Position Size: ${size.toFixed(3)} units`;
     }
 
-    balance.oninput = risk.oninput = entry.oninput = stop.oninput = recalc;
+    balance.oninput =
+    risk.oninput =
+    entry.oninput =
+    stop.oninput =
+    recalc;
 </script>
 
 </body>
