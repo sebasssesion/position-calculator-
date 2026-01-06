@@ -1,132 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;400;700&display=swap" rel="stylesheet">
-  <title>Position Size Calculator</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #0F0F0F;
-      font-family: 'Roboto', sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    .card {
-      width: 350px;
-      height: 450px;
-      background: url("pic.png") center/cover no-repeat;
-      border-radius: 25px;
-      color: #cccccc;
-      padding: 40px;
-      box-sizing: border-box;
+<title>Position Size Calculator</title>
+
+<style>
+/* ===============================
+   GLOBAL
+================================ */
+body {
+  margin: 0;
+  background: #080808;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* San Francisco system stack */
+  font-family: -apple-system, BlinkMacSystemFont,
+               "SF Pro Text", "SF Pro Display",
+               "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #ffffff;
 }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 22px;
-      margin-top: -2.5px;
-      font-weight: 700;
-    }
+/* ===============================
+   CARD
+================================ */
+.calculator {
+  width: 500px;
+  height: 500px;
+  background: #121212;
+  border-radius: 70px;
+  position: relative;
+  box-sizing: border-box;
 
-    label {
-        font-size: 15px;
-        margin-top: 1px;
-        background-color: transparent;
-        font-weight: 200;
-    }
+  /* gradient stroke */
+  border: 4px solid;
+  border-image: linear-gradient(
+    to bottom,
+    #3D3D3D,
+    #2B2B2B
+  ) 1;
 
-    input {
-        color: #cccccc;
-        width: 100%;
-        padding: 0px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 15px;
-        border-radius: 8px;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        font-weight: 200;
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    .result-box {
-        margin-top: 1px;
-        padding: 20px;
-        border-radius: 10px;
-        font-size: 15px;
-        font-weight: 700;
-    }
+/* ===============================
+   BITCOIN ICON
+================================ */
+.icon-wrap {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(61,61,61,0.3);
+  border: 2.5px solid #3D3D3D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    @media (max-width: 600px) {
-        h1 { font-size: 50px; }
-        label, input { font-size: 15px; }
-        .result-box { font-size: 15px; }
-    }
-  
-  </style>
+  box-shadow: 0 0 4px 2.5px rgba(0,0,0,1);
+
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.icon-wrap img {
+  width: 55px;
+  height: 55px;
+}
+
+/* ===============================
+   TOP VALUE
+================================ */
+.top-values {
+  margin-top: 35px;
+  text-align: center;
+}
+
+.units {
+  font-size: 80px;
+  font-weight: 600; /* SemiBold */
+  line-height: 1;
+}
+
+.risk {
+  font-size: 18px;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+.money {
+  font-size: 18px;
+  font-weight: 500;
+  color: #44B480;
+}
+
+/* align text block vertically with icon */
+.top-values {
+  padding-top: 15px;
+}
+
+/* ===============================
+   INPUT CARDS
+================================ */
+.inputs {
+  margin-top: auto;
+  margin-bottom: 30px;
+  width: 460px;
+}
+
+/* shared style */
+.input-card {
+  width: 460px;
+  height: 94px;
+  background: rgba(61,61,61,0.3);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* top */
+.input-card.top {
+  border-radius: 50px 50px 5px 5px;
+}
+
+/* bottom */
+.input-card.bottom {
+  border-radius: 5px 5px 50px 50px;
+}
+
+/* ===============================
+   INPUT BLOCK
+================================ */
+.input-block {
+  text-align: center;
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 400;
+  color: #4D4D4D;
+}
+
+.value {
+  margin-top: 6px;
+  font-size: 25px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.value.active {
+  color: #44B480;
+}
+
+.value input {
+  background: none;
+  border: none;
+  outline: none;
+  color: inherit;
+  font-size: 25px;
+  font-weight: 500;
+  width: 100px;
+  text-align: center;
+}
+
+.small-dollar {
+  font-size: 18px;
+  font-weight: 500;
+  margin-right: 2px;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+button {
+  margin-top: 20px;
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 25px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+</style>
 </head>
+
 <body>
-  <div class="card">
-        <h1>Position Size Calculator</h1>
 
-        <label>Balance ($)</label>
-        <input id="balance" type="number" />
+<div class="calculator">
 
-        <label>Risk (%)</label>
-        <input id="risk" type="number" />
+  <!-- ICON -->
+  <div class="icon-wrap">
+    <img src="bitcoin.png" alt="BTC" />
+  </div>
 
-        <label>Entry Price</label>
-        <input id="entry" type="number" />
+  <!-- TOP VALUES -->
+  <div class="top-values">
+    <div class="units" id="units">0.00</div>
+    <div class="risk">
+      <input id="risk" type="number" value="1" style="width:40px; text-align:center;">%
+      <span class="money" id="money">$0.00</span>
+    </div>
+  </div>
 
-        <label>Stop Loss Price</label>
-        <input id="stop" type="number" />
+  <!-- INPUTS -->
+  <div class="inputs">
 
-        <div class="result-box">
-            <div id="moneyRisk">Money at Risk: </div>
-            <div id="units">Units: </div>
+    <div class="input-card top">
+      <div class="input-block">
+        <div class="label">Entry Price</div>
+        <div class="value">
+          <span class="small-dollar">$</span>
+          <input id="entry" type="number" placeholder="0.00">
         </div>
+      </div>
+
+      <div class="input-block">
+        <div class="label">Balance</div>
+        <div class="value active">
+          <span class="small-dollar">$</span>
+          <input id="balance" type="number" placeholder="0.00">
+        </div>
+      </div>
+
+      <div class="input-block">
+        <div class="label">Stop Loss</div>
+        <div class="value">
+          <span class="small-dollar">$</span>
+          <input id="stop" type="number" placeholder="0.00">
+        </div>
+      </div>
     </div>
 
-    <script>
-        const balance = document.getElementById("balance");
-        const risk = document.getElementById("risk");
-        const entry = document.getElementById("entry");
-        const stop = document.getElementById("stop");
-        const moneyRisk = document.getElementById("moneyRisk");
-        const units = document.getElementById("units");
+    <div class="input-card bottom">
+      <button id="calculate" disabled>Calculate</button>
+    </div>
 
-        function recalc() {
-            const bal = parseFloat(balance.value);
-            const r = parseFloat(risk.value);
-            const e = parseFloat(entry.value);
-            const s = parseFloat(stop.value);
+  </div>
 
-            if (isNaN(bal) || isNaN(r) || isNaN(e) || isNaN(s) || e === s) {
-                moneyRisk.textContent = "Money at Risk:";
-                units.textContent = "Units:";
-                return;
-            }
+</div>
 
-            const money = bal * (r / 100);
-            const size = money / Math.abs(e - s);
+<script>
+const balance = document.getElementById("balance");
+const risk = document.getElementById("risk");
+const entry = document.getElementById("entry");
+const stop = document.getElementById("stop");
+const units = document.getElementById("units");
+const money = document.getElementById("money");
+const btn = document.getElementById("calculate");
 
-            moneyRisk.textContent = `Money at Risk: $${money.toFixed(2)}`;
-            units.textContent = `Units: ${size.toFixed(3)}`;
-        }
+function canCalculate() {
+  return balance.value && risk.value && entry.value && stop.value && entry.value !== stop.value;
+}
 
-        balance.oninput =
-        risk.oninput =
-        entry.oninput =
-        stop.oninput =
-        recalc;
-    </script>
+function calculate() {
+  const bal = parseFloat(balance.value);
+  const r = parseFloat(risk.value);
+  const e = parseFloat(entry.value);
+  const s = parseFloat(stop.value);
+
+  const moneyRisk = bal * (r / 100);
+  const positionSize = moneyRisk / Math.abs(e - s);
+
+  units.textContent = positionSize.toFixed(2);
+  money.textContent = `$${moneyRisk.toFixed(2)}`;
+}
+
+[balance, risk, entry, stop].forEach(input => {
+  input.addEventListener("input", () => {
+    btn.disabled = !canCalculate();
+  });
+});
+
+btn.addEventListener("click", calculate);
+</script>
 
 </body>
 </html>
